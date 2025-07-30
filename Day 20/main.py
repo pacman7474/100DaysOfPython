@@ -8,6 +8,7 @@ screen = Screen()
 screen.setup(width=600,height=600)
 screen.bgcolor("black")
 screen.title("Snake on a plane!")
+screen.colormode(255)
 
 screen.tracer(0)
 snake = Snake()
@@ -27,16 +28,22 @@ while game_running:
     screen.onkey(key="e",fun=snake.eat)
     if snake.head.distance(item) < 15:
         snake.eat()
+        snake.head.color(item.pencolor())
         item.eaten()
-        scoreboard.update_score()
+        scoreboard.increase_score()
 
 
     screen.listen()
     time.sleep(.1)
     screen.update()
+    if snake.head.xcor() > 275 or snake.head.xcor() < -275 or snake.head.ycor() > 275 or snake.head.ycor() < -275:
+        game_running = False
+        scoreboard.game_over()
 
-
-
+    for seg in snake.body[2:]:
+        if snake.head.distance(seg) < 10:
+            game_running = False
+            scoreboard.game_over()
 
 
 screen.exitonclick()

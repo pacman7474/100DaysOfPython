@@ -12,7 +12,7 @@ class Snake:
             new_seg.goto(x * -20 + x, 0)
             self.body.append(new_seg)
         self.head = self.body[0]
-        self.tail = self.body[STARTING_SEGMENTS -1]
+        self.tail = self.body[-1]
 
     def create_seg(self):
         seg = Turtle("square")
@@ -31,6 +31,7 @@ class Snake:
             new_x = self.body[i -1].xcor()
             new_y = self.body[i -1].ycor()
             self.body[i].goto(new_x,new_y)
+            self.body[i].color(self.body[i-1].pencolor())
         self.body[0].forward(MOVE_DISTANCE)
 
     def left(self):
@@ -38,5 +39,7 @@ class Snake:
 
     def right(self):
         self.body[0].right(90)
+
+
 
 
