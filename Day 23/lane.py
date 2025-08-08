@@ -1,7 +1,7 @@
 from car import Car
 import random
 SPEEDS = [5,7,10,12,15,20]
-X_POS = [-500,-400,-300,-200,-100,0,100,200,300,400,500]
+X_POS = [-420,-280,-140,0,140,280,420]
 
 class Lane():
     def __init__(self):
@@ -23,9 +23,17 @@ class Lane():
         for this_car in self.cars:
             x_coord = random.choice(X_POS)
             this_car.goto(x_coord,y_coord)
+            this_car.set_position()
 
     def move_lane(self):
         for x in self.cars:
-            x.forward(self.speed)
+            x.move_car(self.speed)
+            if x.xcor() > 660:
+                x.goto(-660,x.ycor())
+            elif x.xcor() < -660:
+                x.goto(660,x.ycor())
+            x.rect.center = (int(x.xcor()), int(x.ycor()))
+
+
 
 

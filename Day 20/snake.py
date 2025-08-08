@@ -6,6 +6,9 @@ STARTING_SEGMENTS = 3
 class Snake:
 
     def __init__(self):
+        self.create_snake()
+
+    def create_snake(self):
         self.body = []
         for x in range(STARTING_SEGMENTS):
             new_seg = self.create_seg()
@@ -39,6 +42,12 @@ class Snake:
 
     def right(self):
         self.body[0].right(90)
+
+    def reset(self):
+        for x in self.body:
+            x.goto(1000,1000)
+        self.body.clear()
+        self.create_snake()
 
 
 
